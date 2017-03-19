@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
 import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
 import { FlashMessagesModule } from 'angular2-flash-messages';
+import {HashLocationStrategy, LocationStrategy} from '@angular/common';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -33,7 +34,7 @@ const firebaseAuthConfig = {
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'listings', component: ListingsComponent},
-  {path: 'listing:/id', component: ListingComponent},
+  {path: 'listing/:id', component: ListingComponent},
   {path: 'add-listing', component: AddListingComponent},
   {path: 'edit-listing/:id', component: EditListingComponent}
 ];
@@ -57,7 +58,7 @@ const appRoutes: Routes = [
     AngularFireModule.initializeApp(firebaseConfig, firebaseAuthConfig),
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [FirebaseService],
+  providers: [FirebaseService, {provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

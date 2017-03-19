@@ -16,6 +16,15 @@ export class FirebaseService {
 	getListings() {
 		return this.listings;
 	}
+
+	getListingDetail(id) {
+		this.listing = this.af.database.object('/listings/'+id) as FirebaseObjectObservable<Listing>;
+		return this.listing;
+	}
+
+	deleteListing(id) {
+		return this.listings.remove(id);
+	}
 }
 
 interface Listing {
