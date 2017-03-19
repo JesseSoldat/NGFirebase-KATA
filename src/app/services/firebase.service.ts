@@ -26,6 +26,10 @@ export class FirebaseService {
 		return this.listings.remove(id);
 	}
 
+	updateListing(id, listing) {
+		return this.listings.update(id, listing);
+	}
+
 	addListing(listing) {
 		let storageRef = firebase.storage().ref();
 		for(let selectedFile of [(<HTMLInputElement>document.getElementById('image')).files[0]]){
