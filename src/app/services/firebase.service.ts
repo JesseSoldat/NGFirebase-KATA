@@ -25,6 +25,19 @@ export class FirebaseService {
 	deleteListing(id) {
 		return this.listings.remove(id);
 	}
+
+	addListing(listing) {
+		let storageRef = firebase.storage().ref();
+		for(let selectedFile of [(<HTMLInputElement>document.getElementById('image')).files[0]]){
+			let path = `/${this.folder}/${selectedFile.name}`;
+			let iRef = storageRef.child(path);
+			iRef.put(selectedFile).then((snapshot) => {
+				listing.image = selectedFile.name;
+				listing.path = path;
+				return this.listings.push(listing);
+			})
+		}
+	}
 }
 
 interface Listing {
