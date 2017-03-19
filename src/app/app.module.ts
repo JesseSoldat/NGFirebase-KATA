@@ -14,6 +14,8 @@ import { ListingComponent } from './listing/listing.component';
 import { ListingsComponent } from './listings/listings.component';
 import { NavbarComponent } from './navbar/navbar.component';
 
+import { FirebaseService } from './services/firebase.service';
+
 // Initialize Firebase
 var firebaseConfig = {
   apiKey: "AIzaSyCZ0Kt_NXjhwekjY7a_7KXPcMvu5cAjPWI",
@@ -55,7 +57,7 @@ const appRoutes: Routes = [
     AngularFireModule.initializeApp(firebaseConfig, firebaseAuthConfig),
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [],
+  providers: [FirebaseService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
